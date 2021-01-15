@@ -20,7 +20,7 @@ function howManyMovies (coffee){
             elem.director === "Steven Spielberg" && 
             elem.genre && 
             elem.genre.indexOf("Drama") !== -1 ){
-                return true
+            return true
         };
         
         return false
@@ -149,14 +149,23 @@ function turnHoursToMinutes (coffeeArr) {
     let coffeeCloneArr =  JSON.parse(JSON.stringify(coffeeArr));
     
     let mapCoffee = coffeeCloneArr.map((elem) => {
-      let hours = Number((elem.duration.split('h')[0])*60)
-      let min = Number(elem.duration.split('h')[1].slice(0,-3))
-      let totalmin = hours + min 
+      
+      let hours, min;
+      if(elem.duration.indexOf('h') === -1 ) {
+        hours = 0;
+        min = Number(elem.duration.split('min')[0])
+      }
+      else {
+        hours = Number((elem.duration.split('h')[0]))
+        min = Number(elem.duration.split('h')[1].slice(0,-3))
+      }
+      
+      let totalmin = (hours * 60) + min 
       elem.duration = totalmin
       return elem
     })
     
-    return mapCoffee 
-  };
+    return mapCoffee  
+};
 
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
