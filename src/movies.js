@@ -144,6 +144,19 @@ function orderAlphabetically (coffeeArr) {
 };
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-
+function turnHoursToMinutes (coffeeArr) {
+  
+    let coffeeCloneArr =  JSON.parse(JSON.stringify(coffeeArr));
+    
+    let mapCoffee = coffeeCloneArr.map((elem) => {
+      let hours = Number((elem.duration.split('h')[0])*60)
+      let min = Number(elem.duration.split('h')[1].slice(0,-3))
+      let totalmin = hours + min 
+      elem.duration = totalmin
+      return elem
+    })
+    
+    return mapCoffee 
+  };
 
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
