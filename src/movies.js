@@ -74,7 +74,7 @@ function dramaMoviesRate (coffee) {
   
     let totalCoffees = coffee.reduce((acc, elem) => {   
       if (elem.rate && elem.genre.indexOf("Drama") !== -1 ){ 
-        return acc + Number(elem.rate)
+        return acc + elem.rate
       } 
       else {
         // nothing to add here. Empty cofffecup
@@ -94,11 +94,56 @@ function dramaMoviesRate (coffee) {
   
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-
-
+function orderByYear (coffeeArr) {
+  
+    let clonedArray =  JSON.parse(JSON.stringify(coffeeArr));
+    
+   clonedArray.sort((a, b) => {
+       //numerical order by year  
+      if (a.year > b.year) {
+        return 1; 
+      } else if (a.year < b.year) {
+        return -1;
+      } else {
+        // sort by name after sorting year
+           if (a.title < b.title) {
+            return -1; 
+          } else if (a.title > b.title) {
+            return 1;
+          } else {
+            return 0;
+          }
+      }
+    })
+  return clonedArray
+};
+    
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
+function orderAlphabetically (coffeeArr) {
+    
+    let clonedArray =  JSON.parse(JSON.stringify(coffeeArr));
+    
+    clonedArray.sort((a, b) => {
+
+     if (a.title < b.title) {
+       return -1; 
+        } else if (a.title > b.title) {
+       return 1;
+        } else {
+       return 0;
+       }
+    }) 
+  
+    let firstTitles = [];
+    for (let i = 0; i < 20 && i < clonedArray.length; i++) {
+        firstTitles.push(clonedArray[i].title)    
+    };
+  
+    return firstTitles
+};
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
+
 
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
